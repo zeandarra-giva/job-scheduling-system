@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "url": "https://www.bbc.com/news/technology",
+      "source": "BBC",
+      "category": "Technology",
+      "priority": 1
+    },
+    {
+      "url": "https://techcrunch.com/",
+      "source": "TechCrunch",
+      "category": "Tech News",
+      "priority": 1
+    },
+    {
+      "url": "https://www.wired.com/",
+      "source": "Wired",
+      "category": "Technology",
+      "priority": 2
+    },
+    {
+      "url": "https://arstechnica.com/",
+      "source": "Ars Technica",
+      "category": "Technology",
+      "priority": 2
+    },
+    {
+      "url": "https://www.theverge.com/",
+      "source": "The Verge",
+      "category": "Technology",
+      "priority": 3
+    },
+    {
+      "url": "https://www.engadget.com/",
+      "source": "Engadget",
+      "category": "Technology",
+      "priority": 3
+    },
+    {
+      "url": "https://mashable.com/",
+      "source": "Mashable",
+      "category": "Tech News",
+      "priority": 4
+    },
+    {
+      "url": "https://www.cnet.com/",
+      "source": "CNET",
+      "category": "Technology",
+      "priority": 4
+    },
+    {
+      "url": "https://www.zdnet.com/",
+      "source": "ZDNet",
+      "category": "Enterprise Tech",
+      "priority": 5
+    },
+    {
+      "url": "https://venturebeat.com/",
+      "source": "VentureBeat",
+      "category": "AI & ML",
+      "priority": 5
+    }
+  ]
+}
