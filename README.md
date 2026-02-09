@@ -5,6 +5,7 @@ A production-ready distributed job scheduling and processing system that handles
 ## Table of Contents
 - [Architecture Overview](#architecture-overview)
 - [Features](#features)
+- [Data Visualization with Metabase](#data-visualization-with-metabase)
 - [Database Design](#database-design)
 - [API Documentation](#api-documentation)
 - [Setup Instructions](#setup-instructions)
@@ -104,6 +105,112 @@ A production-ready distributed job scheduling and processing system that handles
 - **Priority Queues**: Articles processed by priority (high/medium/low)
 - **Real-time WebSocket Updates**: Subscribe to job progress in real-time
 - **Scalable Consumers**: Multiple worker instances for parallel processing
+- **Data Visualization**: Metabase integration for interactive dashboards and analytics
+
+---
+
+## Data Visualization with Metabase
+
+Metabase is integrated into the pipeline to provide powerful, interactive data visualization and business intelligence capabilities.
+
+### Overview
+
+Metabase connects directly to your MongoDB database to provide:
+- **Interactive Dashboards**: Real-time visualization of job metrics and scraping statistics
+- **Custom Reports**: Create charts and reports without writing code
+- **Data Exploration**: Browse and query your data through an intuitive UI
+- **Shareable Insights**: Export and share dashboards with stakeholders
+
+### Access Metabase
+
+Once the system is running, access Metabase at:
+```
+http://localhost:3000
+```
+
+### Initial Setup
+
+On first launch, you'll need to complete the Metabase setup:
+
+1. **Create Admin Account**
+   - Navigate to `http://localhost:3000`
+   - Fill in your name, email, and password
+   - Click "Next"
+
+2. **Add MongoDB Database**
+   - Database type: Select "MongoDB"
+   - Display name: `Job Scheduler`
+   - Host: `mongodb`
+   - Port: `27017`
+   - Database name: `job_scheduler`
+   - Username: (leave empty)
+   - Password: (leave empty)
+   - Authentication database: (leave empty)
+   - Click "Connect database"
+
+3. **Skip Data Preferences** (optional)
+   - You can skip the usage data collection step
+
+4. **Start Exploring**
+   - Metabase will scan your database schema
+   - You can now create questions and dashboards
+
+### Sample Dashboard Ideas
+
+Here are some useful visualizations you can create:
+
+#### Job Metrics
+- **Job Status Overview**: Pie chart showing distribution of job statuses (PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED)
+- **Jobs Over Time**: Line chart showing job submissions per day/hour
+- **Job Completion Rate**: Gauge showing percentage of successful jobs
+- **Average Job Duration**: Metric showing mean time from creation to completion
+
+#### Article Scraping Analytics
+- **Articles by Status**: Bar chart of article counts by status
+- **Scraping Success Rate**: Percentage of successfully scraped vs failed articles
+- **Top Sources**: Bar chart showing most frequently scraped sources
+- **Top Categories**: Distribution of articles by category
+- **Priority Distribution**: Pie chart showing articles by priority level
+
+#### Performance Metrics
+- **Average Scraping Time**: Trend line of scraping duration over time
+- **Retry Analysis**: Count of articles by retry_count
+- **Failed Articles**: Table of failed articles with error messages
+- **Cache Hit Rate**: Percentage of cached vs newly scraped articles
+
+#### Real-time Monitoring
+- **Active Jobs**: Count of jobs currently IN_PROGRESS
+- **Queue Depth**: Number of PENDING articles waiting to be scraped
+- **Recent Failures**: List of recently failed articles with timestamps
+
+### Creating Your First Dashboard
+
+1. **Create a Question**
+   - Click "New" → "Question"
+   - Select "Job Scheduler" database
+   - Choose "jobs" collection
+   - Select visualization type (e.g., pie chart)
+   - Filter by status field
+   - Save the question
+
+2. **Build a Dashboard**
+   - Click "New" → "Dashboard"
+   - Name it (e.g., "Job Monitoring")
+   - Add your saved questions
+   - Arrange and resize visualizations
+   - Save the dashboard
+
+3. **Set Auto-refresh** (optional)
+   - Open your dashboard
+   - Click the refresh icon
+   - Select refresh interval (e.g., 1 minute)
+
+### Tips for Effective Dashboards
+
+- **Use Filters**: Add date range filters to analyze specific time periods
+- **Combine Metrics**: Show related metrics together (e.g., job count + success rate)
+- **Set Alerts**: Configure email alerts for critical metrics (e.g., high failure rate)
+- **Share Dashboards**: Generate public links or embed dashboards in other tools
 
 ---
 
@@ -325,6 +432,7 @@ docker-compose up --build
 
 # The API will be available at http://localhost:8000
 # Swagger docs at http://localhost:8000/docs
+# Metabase at http://localhost:3000
 ```
 
 ### Scaling Consumers
@@ -601,6 +709,12 @@ job-scheduling-system/
 | `API_PORT` | API server port | `8000` |
 | `MAX_RETRY_ATTEMPTS` | Max scraping retries | `3` |
 | `SCRAPE_TIMEOUT` | Scraping timeout (seconds) | `30` |
+| `MB_DB_TYPE` | Metabase database type | `postgres` |
+| `MB_DB_DBNAME` | Metabase database name | `metabase` |
+| `MB_DB_PORT` | Metabase database port | `5432` |
+| `MB_DB_USER` | Metabase database user | `metabase` |
+| `MB_DB_PASS` | Metabase database password | `metabase_password` |
+| `MB_DB_HOST` | Metabase database host | `postgres` |
 
 ---
 
